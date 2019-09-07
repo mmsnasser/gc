@@ -12,26 +12,42 @@ function  [mu , h ]  =  fbie(et,etp,A,gam,n,iprec,restart,gmrestol,maxit)
 % of GMRES method inner iterations, gmrestol is the tolerance of the GMRES   
 % method, and maxit is the maximum number of GMRES method outer iterations
 %
-% Author: Mohamed M S Nasser, v 1.0, 10 December 2017.
-% 
-% Please cite this function as:
-%  M.M.S. Nasser, Fast solution of boundary integral equations with the 
-%  generalized Neumann kernel, Electronic Transactions on Numerical 
-%  Analysis,  44 (2015) 189--229.
-% 
-%  PLEASE note that this toolbox contains the files:
-%  zfmm2dpart.m
-%  fmm2d_r2012a.mexw32
-%  fmm2d_r2012a.mexw64
-%  pthreadGC2-w32.dll
-%  pthreadGC2-w64.dll
-%  From the Toolbox:
-%  L. G REENGARD AND Z. G IMBUTAS , FMMLIB2D: A MATLAB toolbox for
-%  fast multipole method in two dimensions, Version 1.2, 2012.
-%  http://www.cims.nyu.edu/cmcl/fmm2dlib/fmm2dlib.html
-%  PLEASE also cite the FMMLIB2D toolbox.
 %
-%%
+% Please cite this function as:
+% M.M.S. Nasser, Fast solution of boundary integral equations with the 
+% generalized Neumann kernel, Electronic Transactions on Numerical 
+% Analysis,  44 (2015) 189-229.
+% 
+%
+% The MATLAB function fbie uses the following files:
+% 
+% zfmm2dpart.m
+% fmm2d_r2012a.mexw32
+% fmm2d_r2012a.mexw64
+% pthreadGC2-w32.dll
+% pthreadGC2-w64.dll
+% 
+% from the MATLAB Toolbox:
+% L. GREENGARD AND Z. GIMBUTAS , FMMLIB2D: A MATLAB toolbox for
+% fast multipole method in two dimensions, Version 1.2, 2012.
+%
+% You can download the whole toolbox from:
+% http://www.cims.nyu.edu/cmcl/fmm2dlib/fmm2dlib.html
+% or from
+% https://github.com/zgimbutas/fmmlib2d
+%
+% Please see: 
+% https://github.com/zgimbutas/fmmlib2d/blob/master/COPYING
+% for more details.
+%
+%
+% PLEASE cite the FMMLIB2D toolbox whenever you use the function fbie.m. 
+%
+% Acknowledgments:
+% I would like to thank Prof. Leslie Greengard and Prof. Zydrunas Gimbutas 
+% for making the MATLAB toolbox FMMLIB2D publicly available.
+%
+%
 a        = [real(et.') ; imag(et.')];
 m        =  length(et)/n-1;
 b1       = [etp./A].';
@@ -43,7 +59,7 @@ for k=2:n
     b(k,1) = (-1)^(k+1)*(1/n)*cot(pi*(k-1)/n);
 end
 %%
-mu     = gmres(@(x)fB(x),-fC(gam),restart,gmrestol,maxit);
+mu      = gmres(@(x)fB(x),-fC(gam),restart,gmrestol,maxit);
 if( nargout == 2 )
     h   = (fC(mu)-fB(gam))./2;
 end
