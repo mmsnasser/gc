@@ -18,7 +18,7 @@ t      = (0:2*pi/n:2*pi-2*pi/n).';
 ratio  =  0.5;
 %
 % 
-level =  8;
+level =  6;
 number_of_intervales = 2^level
 c = 0; r = 1.5; % level of finite Cantor set
 for k = 1:level
@@ -109,7 +109,7 @@ colorbar
 caxis([0 1])
 for k=1:m+ell
     crv    =  zet((k-1)*n+1:k*n,1); crv(n+1)  =  crv(1);
-    plot(real(crv),imag(crv),'k','LineWidth',0.5)
+    plot(real(crv),imag(crv),'k','LineWidth',1.5)
 end
 axis equal
 axis([-2  2 -1  1])
@@ -118,5 +118,5 @@ box on
 set(gca,'XTick',[-2:1:2],'FontSize',14);
 set(gca,'YTick',[-1:0.5:1]);
 set(gcf,'Renderer','opengl')
-print -depsc -r1000  fig_cant_set_har_lc8.eps
+print -depsc -r1000  fig_cant_set_har_lc6.eps
 %%
